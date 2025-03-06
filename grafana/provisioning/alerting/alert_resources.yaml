@@ -1,0 +1,29 @@
+apiVersion: 1
+folders:
+  - orgId: 1
+    title: Operator
+    uid: operator
+  - orgId: 1
+    title: Seed Node
+    uid: seed-node
+  - orgId: 1
+    title: Proof Server
+    uid: proof-server
+
+contactPoints:
+    - orgId: 1
+      name: Drosera Slack
+      receivers:
+        - uid: ceer3bic8nu2pc
+          type: slack
+          settings:
+            recipient: grafana-alerts
+            url: https://hooks.slack.com/services/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
+          disableResolveMessage: false
+
+policies:
+    - orgId: 1
+      receiver: grafana-default-email
+      group_by:
+        - grafana_folder
+        - alertname
