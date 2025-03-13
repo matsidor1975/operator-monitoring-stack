@@ -18,7 +18,7 @@ contactPoints:
           type: slack
           settings:
             recipient: grafana-alerts
-            url: https://hooks.slack.com/services/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
+            url: ${SLACK_WEBHOOK_URL}
           disableResolveMessage: false
 
 policies:
