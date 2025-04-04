@@ -25,7 +25,7 @@ groups:
                 maxDataPoints: 43200
                 queryType: instant
                 refId: A
-          noDataState: NoData
+          noDataState: OK
           execErrState: Error
           for: 0s
           annotations:
@@ -53,7 +53,7 @@ groups:
                 maxDataPoints: 43200
                 queryType: instant
                 refId: A
-          noDataState: NoData
+          noDataState: OK
           execErrState: Error
           for: 0s
           annotations:
@@ -81,7 +81,7 @@ groups:
                 maxDataPoints: 43200
                 queryType: instant
                 refId: A
-          noDataState: NoData
+          noDataState: OK
           execErrState: Error
           for: 0s
           annotations:
@@ -109,7 +109,7 @@ groups:
                 maxDataPoints: 43200
                 queryType: instant
                 refId: A
-          noDataState: NoData
+          noDataState: OK
           execErrState: Error
           for: 0s
           annotations:
@@ -142,7 +142,7 @@ groups:
                 maxDataPoints: 43200
                 queryType: instant
                 refId: A
-          noDataState: NoData
+          noDataState: OK
           execErrState: Error
           for: 0s
           annotations:
@@ -170,7 +170,7 @@ groups:
                 maxDataPoints: 43200
                 queryType: instant
                 refId: A
-          noDataState: NoData
+          noDataState: OK
           execErrState: Error
           for: 0s
           annotations:
@@ -198,7 +198,7 @@ groups:
                 maxDataPoints: 43200
                 queryType: instant
                 refId: A
-          noDataState: NoData
+          noDataState: OK
           execErrState: Error
           for: 0s
           annotations:
@@ -226,7 +226,7 @@ groups:
                 maxDataPoints: 43200
                 queryType: instant
                 refId: A
-          noDataState: NoData
+          noDataState: OK
           execErrState: Error
           for: 0s
           annotations:
@@ -259,7 +259,7 @@ groups:
                 maxDataPoints: 43200
                 queryType: instant
                 refId: A
-          noDataState: NoData
+          noDataState: OK
           execErrState: Error
           for: 0s
           annotations:
@@ -287,7 +287,7 @@ groups:
                 maxDataPoints: 43200
                 queryType: instant
                 refId: A
-          noDataState: NoData
+          noDataState: OK
           execErrState: Error
           for: 0s
           annotations:
@@ -317,7 +317,7 @@ groups:
                 range: false
                 refId: A
                 useBackend: false
-          noDataState: NoData
+          noDataState: OK
           execErrState: Error
           for: 0s
           annotations:
@@ -349,7 +349,7 @@ groups:
                 range: false
                 refId: A
                 useBackend: false
-          noDataState: NoData
+          noDataState: OK
           execErrState: Error
           for: 0s
           annotations:
