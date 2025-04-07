@@ -3,7 +3,7 @@ groups:
     - orgId: 1
       name: Operator Eval Group
       folder: operator
-      interval: 5m
+      interval: 10m
       rules:
         - uid: aeecqkn99byf4c
           title: Operator Started
@@ -12,7 +12,7 @@ groups:
             - refId: A
               queryType: instant
               relativeTimeRange:
-                from: 300
+                from: 600
                 to: 0
               datasourceUid: loki
               model:
@@ -20,8 +20,8 @@ groups:
                   type: loki
                   uid: loki
                 editorMode: builder
-                expr: count_over_time({service_name="drosera_operator"} |= `Operator Node successfully spawned!` [5m]) > 0
-                intervalMs: 1000
+                expr: count_over_time({service_name="drosera_operator"} |= `Operator Node successfully spawned!` [10m]) > 0
+                intervalMs: 30000
                 maxDataPoints: 43200
                 queryType: instant
                 refId: A
@@ -40,7 +40,7 @@ groups:
             - refId: A
               queryType: instant
               relativeTimeRange:
-                from: 300
+                from: 600
                 to: 0
               datasourceUid: loki
               model:
@@ -48,8 +48,8 @@ groups:
                     type: loki
                     uid: loki
                 editorMode: builder
-                expr: count_over_time({service_name="drosera_operator"} |= `Restarting Drosera Operator node` [5m]) > 0
-                intervalMs: 1000
+                expr: count_over_time({service_name="drosera_operator"} |= `Restarting Drosera Operator node` [10m]) > 0
+                intervalMs: 30000
                 maxDataPoints: 43200
                 queryType: instant
                 refId: A
@@ -68,7 +68,7 @@ groups:
             - refId: A
               queryType: instant
               relativeTimeRange:
-                from: 300
+                from: 600
                 to: 0
               datasourceUid: loki
               model:
@@ -76,8 +76,8 @@ groups:
                     type: loki
                     uid: loki
                 editorMode: builder
-                expr: count_over_time({service_name="drosera_operator"} |= `Shutting down Drosera Operator node` [5m]) > 0
-                intervalMs: 1000
+                expr: count_over_time({service_name="drosera_operator"} |= `Shutting down Drosera Operator node` [10m]) > 0
+                intervalMs: 30000
                 maxDataPoints: 43200
                 queryType: instant
                 refId: A
@@ -96,7 +96,7 @@ groups:
             - refId: A
               queryType: instant
               relativeTimeRange:
-                from: 300
+                from: 600
                 to: 0
               datasourceUid: loki
               model:
@@ -104,8 +104,8 @@ groups:
                     type: loki
                     uid: loki
                 editorMode: builder
-                expr: count_over_time({service_name="drosera_operator"} |= `All ETH RPC nodes are unresponsive. Shutting down operator node` [5m]) > 0
-                intervalMs: 1000
+                expr: count_over_time({service_name="drosera_operator"} |= `All ETH RPC nodes are unresponsive. Shutting down operator node` [10m]) > 0
+                intervalMs: 30000
                 maxDataPoints: 43200
                 queryType: instant
                 refId: A
@@ -120,7 +120,7 @@ groups:
     - orgId: 1
       name: Seed Node Eval Group
       folder: seed-node
-      interval: 5m
+      interval: 10m
       rules:
         - uid: mhraqkn99byf4c
           title: Seed Node Started
@@ -129,7 +129,7 @@ groups:
             - refId: A
               queryType: instant
               relativeTimeRange:
-                from: 300
+                from: 600
                 to: 0
               datasourceUid: loki
               model:
@@ -137,8 +137,8 @@ groups:
                   type: loki
                   uid: loki
                 editorMode: builder
-                expr: count_over_time({service_name="drosera_seed_node"} |= `Seed Node successfully spawned!` [5m]) > 0
-                intervalMs: 1000
+                expr: count_over_time({service_name="drosera_seed_node"} |= `Seed Node successfully spawned!` [10m]) > 0
+                intervalMs: 30000
                 maxDataPoints: 43200
                 queryType: instant
                 refId: A
@@ -157,7 +157,7 @@ groups:
             - refId: A
               queryType: instant
               relativeTimeRange:
-                from: 300
+                from: 600
                 to: 0
               datasourceUid: loki
               model:
@@ -165,8 +165,8 @@ groups:
                   type: loki
                   uid: loki
                 editorMode: builder
-                expr: count_over_time({service_name="drosera_seed_node"} |= `Shutting down Drosera seed node` [5m]) > 0
-                intervalMs: 1000
+                expr: count_over_time({service_name="drosera_seed_node"} |= `Shutting down Drosera seed node` [10m]) > 0
+                intervalMs: 30000
                 maxDataPoints: 43200
                 queryType: instant
                 refId: A
@@ -185,7 +185,7 @@ groups:
             - refId: A
               queryType: instant
               relativeTimeRange:
-                from: 300
+                from: 600
                 to: 0
               datasourceUid: loki
               model:
@@ -193,8 +193,8 @@ groups:
                   type: loki
                   uid: loki
                 editorMode: builder
-                expr: count_over_time({service_name="drosera_seed_node"} |= `Restarting Drosera seed node` [5m]) > 0
-                intervalMs: 1000
+                expr: count_over_time({service_name="drosera_seed_node"} |= `Restarting Drosera seed node` [10m]) > 0
+                intervalMs: 30000
                 maxDataPoints: 43200
                 queryType: instant
                 refId: A
@@ -213,7 +213,7 @@ groups:
             - refId: A
               queryType: instant
               relativeTimeRange:
-                from: 300
+                from: 600
                 to: 0
               datasourceUid: loki
               model:
@@ -221,8 +221,8 @@ groups:
                   type: loki
                   uid: loki
                 editorMode: builder
-                expr: count_over_time({service_name="drosera_seed_node"} |= `All ETH RPC nodes are unresponsive. Shutting down seed node` [5m]) > 0
-                intervalMs: 1000
+                expr: count_over_time({service_name="drosera_seed_node"} |= `All ETH RPC nodes are unresponsive. Shutting down seed node` [10m]) > 0
+                intervalMs: 30000
                 maxDataPoints: 43200
                 queryType: instant
                 refId: A
@@ -237,7 +237,7 @@ groups:
     - orgId: 1
       name: Proof Server Eval Group
       folder: proof-server
-      interval: 5m
+      interval: 10m
       rules:
         - uid: jurxqkn99byf4c
           title: Proof Server Started
@@ -246,7 +246,7 @@ groups:
             - refId: A
               queryType: instant
               relativeTimeRange:
-                from: 300
+                from: 600
                 to: 0
               datasourceUid: loki
               model:
@@ -254,8 +254,8 @@ groups:
                   type: loki
                   uid: loki
                 editorMode: builder
-                expr: count_over_time({service_name="drosera-proof-server"} |= `Proof Server listening on` [5m]) > 0
-                intervalMs: 1000
+                expr: count_over_time({service_name="drosera-proof-server"} |= `Proof Server listening on` [10m]) > 0
+                intervalMs: 30000
                 maxDataPoints: 43200
                 queryType: instant
                 refId: A
@@ -274,7 +274,7 @@ groups:
             - refId: A
               queryType: instant
               relativeTimeRange:
-                from: 300
+                from: 600
                 to: 0
               datasourceUid: loki
               model:
@@ -282,8 +282,8 @@ groups:
                   type: loki
                   uid: loki
                 editorMode: builder
-                expr: count_over_time({service_name="drosera-proof-server"} |= `Server shutdown` [5m]) > 0
-                intervalMs: 1000
+                expr: count_over_time({service_name="drosera-proof-server"} |= `Server shutdown` [10m]) > 0
+                intervalMs: 30000
                 maxDataPoints: 43200
                 queryType: instant
                 refId: A
@@ -301,17 +301,17 @@ groups:
           data:
             - refId: A
               relativeTimeRange:
-                from: 300
+                from: 600
                 to: 0
               datasourceUid: prometheus
               model:
                 disableTextWrap: false
                 editorMode: builder
-                expr: avg_over_time(proof_server_process_cpu_usage_percent[5m]) > 75
+                expr: avg_over_time(proof_server_process_cpu_usage_percent[1m]) > 75
                 fullMetaSearch: false
                 includeNullMetadata: true
                 instant: true
-                intervalMs: 1000
+                intervalMs: 30000
                 legendFormat: __auto
                 maxDataPoints: 43200
                 range: false
@@ -321,7 +321,7 @@ groups:
           execErrState: Error
           for: 0s
           annotations:
-            description: The proof server CPU percentage has breached 25% for the past 5 minutes on average
+            description: The proof server CPU percentage has breached 75% for the past 1 minute on average
             summary: High proof server CPU percentage
           labels: {}
           isPaused: false
@@ -333,7 +333,7 @@ groups:
           data:
             - refId: A
               relativeTimeRange:
-                from: 300
+                from: 600
                 to: 0
               datasourceUid: prometheus
               model:
@@ -343,7 +343,7 @@ groups:
                 fullMetaSearch: false
                 includeNullMetadata: true
                 instant: true
-                intervalMs: 1000
+                intervalMs: 30000
                 legendFormat: __auto
                 maxDataPoints: 43200
                 range: false
