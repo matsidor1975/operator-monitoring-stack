@@ -19,11 +19,11 @@ contactPoints:
           settings:
             recipient: grafana-alerts
             url: ${SLACK_WEBHOOK_URL}
-          disableResolveMessage: false
+          disableResolveMessage: true
 
 policies:
     - orgId: 1
       receiver: grafana-default-email
       group_by:
-        - grafana_folder
-        - alertname
+        # - grafana_folder
+        # - alertname
