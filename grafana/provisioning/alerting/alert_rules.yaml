@@ -3,7 +3,7 @@ groups:
     - orgId: 1
       name: Operator Eval Group
       folder: operator
-      interval: 10m
+      interval: 1m
       rules:
         - uid: aeecqkn99byf4c
           title: Operator Started
@@ -25,7 +25,7 @@ groups:
                 maxDataPoints: 43200
                 queryType: instant
                 refId: A
-          noDataState: NoData
+          noDataState: OK
           execErrState: Error
           for: 0s
           annotations:
@@ -53,7 +53,7 @@ groups:
                 maxDataPoints: 43200
                 queryType: instant
                 refId: A
-          noDataState: NoData
+          noDataState: OK
           execErrState: Error
           for: 0s
           annotations:
@@ -81,7 +81,7 @@ groups:
                 maxDataPoints: 43200
                 queryType: instant
                 refId: A
-          noDataState: NoData
+          noDataState: OK
           execErrState: Error
           for: 0s
           annotations:
@@ -109,11 +109,115 @@ groups:
                 maxDataPoints: 43200
                 queryType: instant
                 refId: A
-          noDataState: NoData
+          noDataState: OK
           execErrState: Error
           for: 0s
           annotations:
             summary: All ETH RPC nodes are unresponsive, operator is shutting down completely
+          isPaused: false
+          notification_settings:
+            receiver: Drosera Slack
+        - uid: eeibub6g9pxq8b
+          title: Operator Low ETH Balance
+          condition: C
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 300
+                to: 0
+              datasourceUid: prometheus
+              model:
+                datasource:
+                    type: prometheus
+                    uid: prometheus
+                disableTextWrap: false
+                editorMode: builder
+                exemplar: false
+                expr: eth_balance_ETH
+                format: table
+                fullMetaSearch: false
+                includeNullMetadata: true
+                instant: true
+                interval: ""
+                intervalMs: 30000
+                legendFormat: 'Operator: {{operator_address}}'
+                maxDataPoints: 43200
+                range: false
+                refId: A
+                useBackend: false
+            - refId: C
+              relativeTimeRange:
+                from: 300
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 0.05
+                        type: lt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 30000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+          dashboardUid: feibsm0m2uepse
+          panelId: 7
+          noDataState: OK
+          execErrState: Error
+          for: 0s
+          annotations:
+            __dashboardUid__: feibsm0m2uepse
+            __panelId__: "7"
+            description: "The operator {{ $labels.operator_address }} has fallen below the minimum threshold for a safe ETH balance. Current balance: {{ $values.A.Value }} ETH"
+            summary: "Low ETH Balance ({{ $values.A.Value }} ETH)"
+          labels: {}
+          isPaused: false
+          notification_settings:
+            receiver: Drosera Slack
+        - uid: i7r1le9mw2epxk
+          title: Operator High CPU %
+          condition: A
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 300  # 5 minutes
+                to: 0
+              datasourceUid: prometheus
+              model:
+                disableTextWrap: false
+                editorMode: builder
+                expr: avg_over_time(drosera_process_cpu_usage_percent[5m]) > 75
+                fullMetaSearch: false
+                includeNullMetadata: true
+                instant: true
+                intervalMs: 30000
+                legendFormat: __auto
+                maxDataPoints: 43200
+                range: false
+                refId: A
+                useBackend: false
+          noDataState: OK
+          execErrState: Error
+          for: 0s
+          annotations:
+            description: "The operator CPU percentage has breached 75% for the past 5 minutes on average"
+            summary: "High operator CPU percentage ({{ $values.A.Value }}%)"
+            __dashboardUid__: feibsm0m2uepse
+            __panelId__: "4"
+          labels: {}
           isPaused: false
           notification_settings:
             receiver: Drosera Slack
@@ -142,7 +246,7 @@ groups:
                 maxDataPoints: 43200
                 queryType: instant
                 refId: A
-          noDataState: NoData
+          noDataState: OK
           execErrState: Error
           for: 0s
           annotations:
@@ -170,7 +274,7 @@ groups:
                 maxDataPoints: 43200
                 queryType: instant
                 refId: A
-          noDataState: NoData
+          noDataState: OK
           execErrState: Error
           for: 0s
           annotations:
@@ -198,7 +302,7 @@ groups:
                 maxDataPoints: 43200
                 queryType: instant
                 refId: A
-          noDataState: NoData
+          noDataState: OK
           execErrState: Error
           for: 0s
           annotations:
@@ -226,11 +330,45 @@ groups:
                 maxDataPoints: 43200
                 queryType: instant
                 refId: A
-          noDataState: NoData
+          noDataState: OK
           execErrState: Error
           for: 0s
           annotations:
             summary: All ETH RPC nodes are unresponsive, seed node is shutting down completely
+          isPaused: false
+          notification_settings:
+            receiver: Drosera Slack
+        - uid: o9x4le9mw2hj7f
+          title: Seed Node High CPU %
+          condition: A
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 300  # 5 minutes
+                to: 0
+              datasourceUid: prometheus
+              model:
+                disableTextWrap: false
+                editorMode: builder
+                expr: avg_over_time(seed_node_process_cpu_usage_percent[5m]) > 75
+                fullMetaSearch: false
+                includeNullMetadata: true
+                instant: true
+                intervalMs: 30000
+                legendFormat: __auto
+                maxDataPoints: 43200
+                range: false
+                refId: A
+                useBackend: false
+          noDataState: OK
+          execErrState: Error
+          for: 0s
+          annotations:
+            description: "The seed node CPU percentage has breached 75% for the past 5 minutes on average"
+            summary: "High seed node CPU percentage ({{ $values.A.Value }}%)"
+            __dashboardUid__: bobasm0m2uepse
+            __panelId__: "4"
+          labels: {}
           isPaused: false
           notification_settings:
             receiver: Drosera Slack
@@ -259,7 +397,7 @@ groups:
                 maxDataPoints: 43200
                 queryType: instant
                 refId: A
-          noDataState: NoData
+          noDataState: OK
           execErrState: Error
           for: 0s
           annotations:
@@ -287,7 +425,7 @@ groups:
                 maxDataPoints: 43200
                 queryType: instant
                 refId: A
-          noDataState: NoData
+          noDataState: OK
           execErrState: Error
           for: 0s
           annotations:
@@ -301,13 +439,13 @@ groups:
           data:
             - refId: A
               relativeTimeRange:
-                from: 600
+                from: 300  # 5 minutes
                 to: 0
               datasourceUid: prometheus
               model:
                 disableTextWrap: false
                 editorMode: builder
-                expr: avg_over_time(proof_server_process_cpu_usage_percent[1m]) > 75
+                expr: avg_over_time(proof_server_process_cpu_usage_percent[5m]) > 75
                 fullMetaSearch: false
                 includeNullMetadata: true
                 instant: true
@@ -317,12 +455,14 @@ groups:
                 range: false
                 refId: A
                 useBackend: false
-          noDataState: NoData
+          noDataState: OK
           execErrState: Error
           for: 0s
           annotations:
-            description: The proof server CPU percentage has breached 75% for the past 1 minute on average
-            summary: High proof server CPU percentage
+            description: "The proof server CPU percentage has breached 75% for the past 5 minutes on average"
+            summary: "High proof server CPU percentage ({{ $values.A.Value }}%)"
+            __dashboardUid__: aeies2bb7iy2oe
+            __panelId__: "4"
           labels: {}
           isPaused: false
           notification_settings:
@@ -349,12 +489,84 @@ groups:
                 range: false
                 refId: A
                 useBackend: false
-          noDataState: NoData
+          noDataState: OK
           execErrState: Error
           for: 0s
           annotations:
             description: The proof server is using more than 1 GB of storage
             summary: High proof server storage usage
+            __dashboardUid__: aeies2bb7iy2oe
+            __panelId__: "5"
+          labels: {}
+          isPaused: false
+          notification_settings:
+            receiver: Drosera Slack
+        - uid: proofb6g9px7fs
+          title: Proof Server Low ETH Balance
+          condition: C
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 300
+                to: 0
+              datasourceUid: prometheus
+              model:
+                datasource:
+                    type: prometheus
+                    uid: prometheus
+                disableTextWrap: false
+                editorMode: builder
+                exemplar: false
+                expr: proof_server_eth_balance_ETH
+                format: table
+                fullMetaSearch: false
+                includeNullMetadata: true
+                instant: true
+                interval: ""
+                intervalMs: 30000
+                legendFormat: 'Proof Server: {{operator_address}}'
+                maxDataPoints: 43200
+                range: false
+                refId: A
+                useBackend: false
+            - refId: C
+              relativeTimeRange:
+                from: 300
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 0.05
+                        type: lt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 30000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+          dashboardUid: aeies2bb7iy2oe
+          panelId: 7
+          noDataState: OK
+          execErrState: Error
+          for: 0s
+          annotations:
+            __dashboardUid__: aeies2bb7iy2oe
+            __panelId__: "7"
+            description: "The operator {{ $labels.operator_address }} has fallen below the minimum threshold for a safe ETH balance. Current balance: {{ $values.A.Value }} ETH"
+            summary: "Low ETH Balance ({{ $values.A.Value }} ETH)"
           labels: {}
           isPaused: false
           notification_settings:
