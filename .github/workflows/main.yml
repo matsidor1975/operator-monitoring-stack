@@ -11,6 +11,7 @@ jobs:
       matrix:
         environments: [ devnet, testnet ]
     runs-on: ubuntu-latest
+    environment: ${{ matrix.environments }}  
     env:
       PLAYBOOK: monitor
       ENVIRONMENT: ${{ matrix.environments }}
