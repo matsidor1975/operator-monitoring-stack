@@ -2,17 +2,19 @@ services:
   otel-collector:
     image: otel/opentelemetry-collector-contrib:0.86.0
     command: ["--config=/etc/otel-collector.yaml"]
-    volumes:
-      - ./otel-collector.yaml:/etc/otel-collector.yaml
-    ports:
-      - "4317:4317"
     environment:
       - BASIC_AUTH_USERNAME=${BASIC_AUTH_USERNAME}
       - BASIC_AUTH_PASSWORD=${BASIC_AUTH_PASSWORD}
+    ports:
+      - "4317:4317"
+    restart: unless-stopped
+    volumes:
+      - ./otel-collector.yaml:/etc/otel-collector.yaml
 
   tempo:
     image: grafana/tempo:latest
     command: ["-config.file=/etc/tempo.yaml"]
+    restart: unless-stopped
     volumes:
       - ./tempo.yaml:/etc/tempo.yaml
       - tempo-data:/var/tempo
@@ -26,24 +28,24 @@ services:
       - --web.enable-remote-write-receiver
       - --enable-feature=exemplar-storage
       - --storage.tsdb.retention.time=168h
+    restart: unless-stopped
     volumes:
       - ./prometheus.yaml:/etc/prometheus.yaml
       - prometheus-data:/prometheus
 
+
   loki:
     image: grafana/loki:3.0.0
+    command: -config.file=/etc/loki/config.yml
     ports:
       - "3100:3100"
+    restart: unless-stopped
     volumes:
       - ./loki:/etc/loki
       - loki-data:/loki
-    command: -config.file=/etc/loki/config.yml
 
   grafana:
     image: grafana/grafana:11.0.0
-    volumes:
-      - ./grafana/provisioning:/etc/grafana/provisioning
-      - grafana-data:/var/lib/grafana
     environment:
       - GF_AUTH_ANONYMOUS_ENABLED=true
       - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
@@ -53,6 +55,10 @@ services:
       - SLACK_WEBHOOK_URL=${SLACK_WEBHOOK_URL}
     ports:
       - "3000:3000"
+    restart: unless-stopped
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - grafana-data:/var/lib/grafana
 
 volumes:
   tempo-data:

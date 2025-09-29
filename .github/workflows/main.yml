@@ -9,21 +9,21 @@ jobs:
   deploy-applications:
     strategy:
       matrix:
-        environments: [ devnet, testnet ]
+        environments: [ devnet, testnet, mainnet ]
     runs-on: ubuntu-latest
-    environment: ${{ matrix.environments }}  
+    environment: ${{ matrix.environments }}
     env:
       PLAYBOOK: monitor
       ENVIRONMENT: ${{ matrix.environments }}
       GITHUB_TOKEN: ${{ secrets.DEVOPS_GITHUB_TOKEN }}
     steps:
       - name: Trigger Infra Devnet Deploy Workflow
-        run: | 
+        run: |
           response=$(curl -f -L -H "Accept: application/vnd.github+json" \
                   -H "Authorization: Bearer ${GITHUB_TOKEN}" \
                   -H "X-GitHub-Api-Version: 2022-11-28" \
                   https://api.github.com/repos/drosera-network/infra/actions/workflows/d_deploy_ansible.yml)
-          
+
           workflow_id=$(echo "${response}" | jq -r .id)
 
           curl -f -L \
