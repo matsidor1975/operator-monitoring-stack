@@ -133,7 +133,7 @@ groups:
                 disableTextWrap: false
                 editorMode: builder
                 exemplar: false
-                expr: eth_balance_ETH
+                expr: eth_balance_ETH{service_name="drosera_operator"}
                 format: table
                 fullMetaSearch: false
                 includeNullMetadata: true
@@ -517,14 +517,14 @@ groups:
                 disableTextWrap: false
                 editorMode: builder
                 exemplar: false
-                expr: proof_server_eth_balance_ETH
+                expr: eth_balance_ETH{service_name="drosera_proof_server"}
                 format: table
                 fullMetaSearch: false
                 includeNullMetadata: true
                 instant: true
                 interval: ""
                 intervalMs: 30000
-                legendFormat: 'Proof Server: {{operator_address}}'
+                legendFormat: 'Proof Server: {{proof_server_address}}'
                 maxDataPoints: 43200
                 range: false
                 refId: A
@@ -565,7 +565,7 @@ groups:
           annotations:
             __dashboardUid__: aeies2bb7iy2oe
             __panelId__: "7"
-            description: "The operator {{ $labels.operator_address }} has fallen below the minimum threshold for a safe ETH balance. Current balance: {{ $values.A.Value }} ETH"
+            description: "The proof server {{ $labels.proof_server_address }} has fallen below the minimum threshold for a safe ETH balance. Current balance: {{ $values.A.Value }} ETH"
             summary: "Low ETH Balance ({{ $values.A.Value }} ETH)"
           labels: {}
           isPaused: false
